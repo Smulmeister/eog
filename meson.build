@@ -126,8 +126,8 @@ assert(have_zlib, 'No sufficient zlib library found on your system')
 # EXIF (optional)
 have_exif = false
 if get_option('libexif')
-  libexif_dep = dependency('libexif', version: '>= 0.6.14', required: false)
-  have_exif = libexif_dep.found() and cc.has_header('libexif/exif-data.h', dependencies: libexif_dep)
+  libexif_dep = dependency('gexiv2', version: '>= 0.10.4', required: false)
+  have_exif = libexif_dep.found() and cc.has_header('gexiv2/gexiv2.h', dependencies: libexif_dep)
 
   if have_exif
     eog_deps += libexif_dep
