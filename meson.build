@@ -133,6 +133,8 @@ if get_option('libexif')
     eog_deps += libexif_dep
     config_h.set10('HAVE_EXIF', true,
                    description: 'EXIF Support.')
+    config_h.set10('HAVE_EXEMPI', true,
+                   description: 'XMP Support.')
   endif
 endif
 
@@ -146,19 +148,6 @@ if get_option('cms')
     eog_deps += libcms_dep
     config_h.set10('HAVE_LCMS', true,
                    description: 'Little CMS Support.')
-  endif
-endif
-
-# Exempi (optional)
-have_exempi = false
-if get_option('xmp')
-  libexempi_dep = dependency('exempi-2.0', version: '>= 1.99.5', required: false)
-  have_exempi = libexempi_dep.found()
-
-  if have_exempi
-    eog_deps += libexempi_dep
-    config_h.set10('HAVE_EXEMPI', true,
-                   description: 'XMP Support.')
   endif
 endif
 
@@ -287,7 +276,7 @@ output += '  Source code location .......:  ' + meson.source_root() + '\n'
 output += '  Compiler ...................:  ' + cc.get_id() + '\n'
 output += '  Extra Compiler Warnings ....:  ' + ' '.join(compiler_flags) + '\n'
 output += '  EXIF support ...............:  ' + have_exif.to_string() + '\n'
-output += '  XMP support ................:  ' + have_exempi.to_string() + '\n'
+output += '  XMP support ................:  ' + have_exif.to_string() + '\n'
 output += '  JPEG support ...............:  ' + have_jpeg.to_string() + '\n'
 output += '  Colour management support ..:  ' + have_lcms.to_string() + '\n'
 output += '  GObject Introspection.......:  ' + have_gir.to_string() + '\n'
